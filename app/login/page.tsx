@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation"
 import { signInWithEmailAndPassword, signInWithPopup, onAuthStateChanged } from "firebase/auth"
 import { auth, googleProvider } from "@/lib/firebase"
 import Link from "next/link"
-import { signInWithPopup } from "firebase/auth";
 import { Button } from "@/components/ui/button"
 
 export default function LoginPage() {
@@ -38,7 +37,7 @@ export default function LoginPage() {
     }
   }
 
- const handleGoogleLogin = async () => {
+  const handleGoogleLogin = async () => {
     setError("")
     setLoading(true)
 
