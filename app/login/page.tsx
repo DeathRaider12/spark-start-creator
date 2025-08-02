@@ -46,7 +46,13 @@ export default function LoginPage() {
       router.push("/dashboard")
     } catch (err: any) {
       console.error("Google login error:", err)
-      setError(err.message || "An error occurred during Google login")
+      if (err.code === "auth/unauthorized-domain") {
+        setError(
+          "Google login failed: Your domain is not authorized. Please add it to Firebase Console > Authentication > Settings > Authorized domains.",
+        )
+      } else {
+        setError(err.message || "An error occurred during Google login")
+      }
     } finally {
       setLoading(false)
     }
