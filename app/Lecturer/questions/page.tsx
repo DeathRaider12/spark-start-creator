@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import { collection, getDocs, updateDoc, doc, query, where } from "firebase/firestore"
 import { db } from "@/lib/firebase"
-import AuthGuard from "@/components/AuthGuard"
+import AuthGuard from "../../../src/components/AuthGuard"
 import toast from "react-hot-toast"
 
 export default function LecturerQuestionsPage() {

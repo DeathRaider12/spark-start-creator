@@ -1,6 +1,6 @@
 "use client"
 
-import AuthGuard from "@/components/AuthGuard"
+import AuthGuard from "../../src/components/AuthGuard"
 import { Button } from "@/components/ui/button"
 
 export default function LessonsPage() {

@@ -1,8 +1,8 @@
 "use client"
 
-import AuthGuard from "@/components/AuthGuard"
+import AuthGuard from "../../src/components/AuthGuard"
 import { Button } from "@/components/ui/button"
-import Link from "next/link"
+import { Link } from "react-router-dom"
 
 export default function QuestionsPage() {
   return (
@@ -11,7 +11,7 @@ export default function QuestionsPage() {
         <div className="max-w-4xl mx-auto">
           <div className="flex justify-between items-center mb-8">
             <h1 className="text-3xl font-bold text-blue-900">All Questions</h1>
-            <Link href="/ask">
+            <Link to="/ask">
               <Button className="bg-blue-700 text-white hover:bg-blue-800">Ask New Question</Button>
             </Link>
           </div>
@@ -72,7 +72,7 @@ export default function QuestionsPage() {
 
           <div className="text-center mt-12">
             <p className="text-gray-600 mb-4">Have a question that hasn't been asked?</p>
-            <Link href="/ask">
+            <Link to="/ask">
               <Button className="bg-green-600 text-white hover:bg-green-700">Ask Your Question</Button>
             </Link>
           </div>

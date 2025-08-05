@@ -5,7 +5,7 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage"
 import { addDoc, collection, serverTimestamp } from "firebase/firestore"
 import { auth, db, storage } from "@/lib/firebase"
 import toast from "react-hot-toast"
-import AuthGuard from "@/components/AuthGuard"
+import AuthGuard from "../../../src/components/AuthGuard"
 
 export default function UploadLessonPage() {
   const [file, setFile] = useState<File | null>(null)

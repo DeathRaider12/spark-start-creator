@@ -5,7 +5,7 @@ import { onAuthStateChanged } from "firebase/auth"
 import { getDoc, doc } from "firebase/firestore"
 import { auth, db } from "@/lib/firebase"
 import { useNavigate } from "react-router-dom"
-import AuthGuard from "@/components/AuthGuard"
+import AuthGuard from "../../src/components/AuthGuard"
 
 export default function LecturerDashboard() {
   const [loading, setLoading] = useState(true)

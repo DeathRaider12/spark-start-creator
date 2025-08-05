@@ -4,7 +4,7 @@ import { useState } from "react"
 import { auth, db } from "@/lib/firebase"
 import { addDoc, collection, serverTimestamp } from "firebase/firestore"
 import toast from "react-hot-toast"
-import AuthGuard from "@/components/AuthGuard"
+import AuthGuard from "../../src/components/AuthGuard"
 
 export default function AskPage() {
   const [title, setTitle] = useState("")

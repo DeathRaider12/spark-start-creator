@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import { collection, getDocs, query, where } from "firebase/firestore"
 import { auth, db } from "@/lib/firebase"
-import AuthGuard from "@/components/AuthGuard"
+import AuthGuard from "../../../src/components/AuthGuard"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { StudentProgress } from "@/components/student-progress"
 import { AchievementsDisplay } from "@/components/achievements"
@@ -11,7 +11,7 @@ import { DiscussionForum } from "@/components/discussion-forum"
 import { StudyGroups } from "@/components/study-groups"
 import { Certificates } from "@/components/certificates"
 import { NotificationCenter } from "@/components/notification-center"
-import Link from "next/link"
+import { Link } from "react-router-dom"
 
 export default function StudentDashboard() {
   const [questions, setQuestions] = useState<any[]>([])
@@ -84,7 +84,7 @@ export default function StudentDashboard() {
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-2xl font-bold">Your Questions</h2>
                 <Link
-                  href="/ask"
+                  to="/ask"
                   className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2"
                 >
                   Ask New Question
@@ -104,7 +104,7 @@ export default function StudentDashboard() {
                         Status: {question.answered ? "Answered" : "Pending"}
                       </span>
                       <Link
-                        href={`/questions/${question.id}`}
+                        to={`/questions/${question.id}`}
                         className="text-primary hover:underline"
                       >
                         View Details →

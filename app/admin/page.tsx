@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import { collection, getDocs, updateDoc, doc, query, where } from "firebase/firestore"
 import { db, auth } from "@/lib/firebase"
-import useUser from "@/hooks/useUser"
+import useUser from "../../src/hooks/useUser"
 import { useNavigate } from "react-router-dom"
 import { toast } from "sonner"
 import { Card, CardContent } from "@/components/ui/card"

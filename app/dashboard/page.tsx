@@ -4,9 +4,9 @@ import { useEffect, useState } from "react"
 import { onAuthStateChanged, User } from "firebase/auth"
 import { doc, getDoc } from "firebase/firestore"
 import { auth, db } from "@/lib/firebase"
-import LogoutButton from "@/components/LogoutButton"
-import AuthGuard from "@/components/AuthGuard"
-import Link from "next/link"
+import LogoutButton from "../../src/components/LogoutButton"
+import AuthGuard from "../../src/components/AuthGuard"
+import { Link } from "react-router-dom"
 
 export default function Dashboard() {
   const [userEmail, setUserEmail] = useState("")
@@ -63,14 +63,14 @@ export default function Dashboard() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-6">
-            <Link href="/ask">
+            <Link to="/ask">
               <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow cursor-pointer">
                 <h3 className="text-lg font-semibold text-blue-700 mb-2">Ask a Question</h3>
                 <p className="text-gray-600">Get help from verified lecturers</p>
               </div>
             </Link>
 
-            <Link href="/lessons">
+            <Link to="/lessons">
               <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow cursor-pointer">
                 <h3 className="text-lg font-semibold text-blue-700 mb-2">Browse Lessons</h3>
                 <p className="text-gray-600">Watch video lessons from experts</p>
@@ -78,7 +78,7 @@ export default function Dashboard() {
             </Link>
 
             {userRole === "lecturer" && (
-              <Link href="/questions">
+              <Link to="/questions">
                 <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow cursor-pointer">
                   <h3 className="text-lg font-semibold text-green-700 mb-2">Answer Questions</h3>
                   <p className="text-gray-600">View student questions and provide answers</p>
