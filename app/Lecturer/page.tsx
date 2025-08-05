@@ -4,17 +4,17 @@ import { useEffect, useState } from "react"
 import { onAuthStateChanged } from "firebase/auth"
 import { getDoc, doc } from "firebase/firestore"
 import { auth, db } from "@/lib/firebase"
-import { useRouter } from "next/navigation"
+import { useNavigate } from "react-router-dom"
 import AuthGuard from "@/components/AuthGuard"
 
 export default function LecturerDashboard() {
   const [loading, setLoading] = useState(true)
-  const router = useRouter()
+  const navigate = useNavigate()
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (!user) {
-        router.push("/login")
+        navigate("/login")
         return
       }
 
@@ -22,7 +22,7 @@ export default function LecturerDashboard() {
       const userSnap = await getDoc(userRef)
 
       if (!userSnap.exists() || userSnap.data().role !== "lecturer") {
-        router.push("/dashboard")
+        navigate("/dashboard")
         return
       }
 
@@ -30,7 +30,7 @@ export default function LecturerDashboard() {
     })
 
     return () => unsubscribe()
-  }, [router])
+  }, [navigate])
 
   if (loading) {
     return <div className="min-h-screen flex items-center justify-center">Loading...</div>

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { collection, getDocs, updateDoc, doc, query, where } from "firebase/firestore"
 import { db, auth } from "@/lib/firebase"
 import useUser from "@/hooks/useUser"
-import { useRouter } from "next/navigation"
+import { useNavigate } from "react-router-dom"
 import { toast } from "sonner"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -16,13 +16,13 @@ export default function AdminPage() {
   const [pendingUsers, setPendingUsers] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const { user } = useUser()
-  const router = useRouter()
+  const navigate = useNavigate()
 
   useEffect(() => {
     // Verify admin access
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (!user || !ADMIN_EMAILS.includes(user.email || "")) {
-        router.replace("/login")
+        navigate("/login", { replace: true })
         toast.error("Admin access required")
       }
     })

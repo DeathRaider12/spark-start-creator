@@ -3,12 +3,12 @@
 import { auth } from "@/lib/firebase"
 import { signOut } from "firebase/auth"
 import { useEffect, useState } from "react"
-import { useRouter } from "next/navigation"
-import Link from "next/link"
+import { useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 export default function NavBar() {
   const [user, setUser] = useState<any>(null)
-  const router = useRouter()
+  const navigate = useNavigate()
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(setUser)
@@ -17,20 +17,20 @@ export default function NavBar() {
 
   const handleLogout = async () => {
     await signOut(auth)
-    router.push("/login")
+    navigate("/login")
   }
 
   return (
     <nav className="bg-white border-b shadow px-4 py-3 flex justify-between items-center">
-      <Link href="/" className="text-xl font-bold text-blue-700">Tutorium</Link>
+      <Link to="/" className="text-xl font-bold text-blue-700">Tutorium</Link>
       <div className="space-x-4 text-sm">
         {user && (
           <>
-            <Link href="/dashboard">Dashboard</Link>
+            <Link to="/dashboard">Dashboard</Link>
             <button onClick={handleLogout} className="text-red-600">Logout</button>
           </>
         )}
-        {!user && <Link href="/login">Login</Link>}
+        {!user && <Link to="/login">Login</Link>}
       </div>
     </nav>
   )

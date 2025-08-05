@@ -1,11 +1,11 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { useRouter } from "next/navigation"
+import { useNavigate } from "react-router-dom"
 import { signInWithEmailAndPassword, signInWithPopup, onAuthStateChanged } from "firebase/auth"
 import { auth, googleProvider } from "@/lib/firebase"
 import { toast } from "sonner"
-import Link from "next/link"
+import { Link } from "react-router-dom"
 import { Card, CardHeader, CardContent, CardFooter } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -13,17 +13,17 @@ import { Label } from "@/components/ui/label"
 import { IconBrandGoogle, IconMail } from "@tabler/icons-react"
 
 export default function LoginPage() {
-  const router = useRouter()
+  const navigate = useNavigate()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => {
-      if (user?.emailVerified) router.push("/dashboard")
+      if (user?.emailVerified) navigate("/dashboard")
     })
     return () => unsub()
-  }, [router])
+  }, [navigate])
 
   const ADMIN_EMAILS = ["lateefedidi4@gmail.com", "envostructs@gmail.com"]
 
@@ -36,7 +36,7 @@ export default function LoginPage() {
 
     // Check if it's an admin email
     if (ADMIN_EMAILS.includes(email)) {
-      router.push(`/admin/login?email=${encodeURIComponent(email)}`)
+      navigate(`/admin/login?email=${encodeURIComponent(email)}`)
       return
     }
 
@@ -48,7 +48,7 @@ export default function LoginPage() {
         return
       }
       toast.success("Welcome back!")
-      router.push("/dashboard")
+      navigate("/dashboard")
     } catch (err: any) {
       toast.error(err.message)
     } finally {
@@ -64,12 +64,12 @@ export default function LoginPage() {
 
       // Check if the Google account is an admin account
       if (email && ADMIN_EMAILS.includes(email)) {
-        router.push(`/admin/login?email=${encodeURIComponent(email)}`)
+        navigate(`/admin/login?email=${encodeURIComponent(email)}`)
         return
       }
 
       toast.success("Welcome to Tutorium!")
-      router.push("/dashboard")
+      navigate("/dashboard")
     } catch (err: any) {
       if (err.code === 'auth/popup-blocked') {
         toast.error("Please allow popups for this site to use Google login")
@@ -90,7 +90,7 @@ export default function LoginPage() {
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
             Don't have an account?{" "}
-            <Link href="/signup" className="font-medium text-blue-600 hover:text-blue-500">
+            <Link to="/signup" className="font-medium text-blue-600 hover:text-blue-500">
               Sign up
             </Link>
           </p>
@@ -112,7 +112,7 @@ export default function LoginPage() {
             <div>
               <Label htmlFor="password" className="flex justify-between">
                 <span>Password</span>
-                <Link href="/forgot-password" className="text-sm text-blue-600 hover:text-blue-500">
+                <Link to="/forgot-password" className="text-sm text-blue-600 hover:text-blue-500">
                   Forgot password?
                 </Link>
               </Label>

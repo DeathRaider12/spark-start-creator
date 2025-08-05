@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { useRouter, useSearchParams } from "next/navigation"
+import { useNavigate, useLocation } from "react-router-dom"
 import { signInWithEmailAndPassword } from "firebase/auth"
 import { auth } from "@/lib/firebase"
 import { toast } from "sonner"
@@ -15,8 +15,9 @@ const ADMIN_EMAILS = ["lateefedidi4@gmail.com", "envostructs@gmail.com"]
 const ADMIN_PASSWORD = "ADMIN_TUTORIUM"
 
 export default function AdminLoginPage() {
-    const router = useRouter()
-    const searchParams = useSearchParams()
+    const navigate = useNavigate()
+    const location = useLocation()
+    const searchParams = new URLSearchParams(location.search)
     const [email, setEmail] = useState(searchParams.get("email") || "")
     const [password, setPassword] = useState("")
     const [loading, setLoading] = useState(false)
@@ -24,7 +25,7 @@ export default function AdminLoginPage() {
     useEffect(() => {
         // Verify this is an admin email
         if (!ADMIN_EMAILS.includes(email)) {
-            router.replace("/login")
+            navigate("/login", { replace: true })
         }
     }, [email])
 
@@ -44,7 +45,7 @@ export default function AdminLoginPage() {
         try {
             await signInWithEmailAndPassword(auth, email, password)
             toast.success("Welcome, Admin!")
-            router.push("/admin")
+            navigate("/admin")
         } catch (err: any) {
             toast.error("Authentication failed. Please try again.")
         } finally {
