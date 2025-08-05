@@ -1,10 +1,4 @@
 import { cn } from "@/lib/utils"
-import { SeoMeta } from "@/components/seo-meta"
-import { ErrorBoundary } from "@/components/error-boundary"
-import NavBar from "@/components/NavBar"
-import { SearchBar } from "@/components/search-bar"
-import { LecturerAnalytics } from "@/components/lecturer-analytics"
-import { ContentManager } from "@/components/content-manager"
 
 interface SkeletonProps {
     className?: string
@@ -28,24 +22,5 @@ export function LoadingState() {
                 <Skeleton className="h-4 w-[80%]" />
             </div>
         </div>
-    )
-}
-
-export default function Dashboard() {
-    return (
-        <ErrorBoundary>
-            <>
-                <SeoMeta
-                    title="Dashboard"
-                    description="Your learning dashboard"
-                    keywords={['learning', 'education', 'engineering']}
-                />
-                <NavBar />
-                <SearchBar />
-                <LoadingState />
-                <LecturerAnalytics />
-                <ContentManager />
-            </>
-        </ErrorBoundary>
     )
 }
