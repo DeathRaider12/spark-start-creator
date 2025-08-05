@@ -38,6 +38,7 @@
     "@radix-ui/react-toggle-group": "latest",
     "@radix-ui/react-tooltip": "latest",
     "@tabler/icons-react": "^3.34.1",
+    "@vitejs/plugin-react": "^4.7.0",
     "autoprefixer": "^10.4.20",
     "chart.js": "^4.5.0",
     "class-variance-authority": "^0.7.1",
@@ -59,11 +60,13 @@
     "react-hot-toast": "^2.5.2",
     "react-quill": "^2.0.0",
     "react-resizable-panels": "latest",
+    "react-router-dom": "^7.7.1",
     "recharts": "latest",
     "sonner": "latest",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
     "vaul": "latest",
+    "vite": "^7.0.6",
     "zod": "^3.24.1"
   },
   "devDependencies": {
