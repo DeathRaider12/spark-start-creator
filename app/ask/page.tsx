@@ -1,5 +1,3 @@
-"use client"
-
 import { useState } from "react"
 import { auth, db } from "@/lib/firebase"
 import { addDoc, collection, serverTimestamp } from "firebase/firestore"

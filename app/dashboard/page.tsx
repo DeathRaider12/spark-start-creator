@@ -1,5 +1,3 @@
-"use client"
-
 import { useEffect, useState } from "react"
 import { onAuthStateChanged, User } from "firebase/auth"
 import { doc, getDoc } from "firebase/firestore"
