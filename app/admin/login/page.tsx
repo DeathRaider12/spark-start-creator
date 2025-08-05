@@ -5,10 +5,10 @@ import { useNavigate, useLocation } from "react-router-dom"
 import { signInWithEmailAndPassword } from "firebase/auth"
 import { auth } from "@/lib/firebase"
 import { toast } from "sonner"
-import { Card, CardHeader, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+import { Card, CardHeader, CardContent } from "../../../components/ui/card"
+import { Button } from "../../../components/ui/button"
+import { Input } from "../../../components/ui/input"
+import { Label } from "../../../components/ui/label"
 import { IconLock } from "@tabler/icons-react"
 
 const ADMIN_EMAILS = ["lateefedidi4@gmail.com", "envostructs@gmail.com"]
@@ -87,7 +87,7 @@ export default function AdminLoginPage() {
                                 required
                                 placeholder="Enter admin password"
                                 value={password}
-                                onChange={(e) => setPassword(e.target.value)}
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
                                 className="mt-1"
                             />
                         </div>

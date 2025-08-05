@@ -1,5 +1,5 @@
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
+import { Link } from "react-router-dom"
+import { Button } from "../components/ui/button"
 import { IconBrain, IconBook, IconVideo, IconUsers, IconCertificate, IconChalkboard } from "@tabler/icons-react"
 
 export default function HomePage() {
@@ -18,12 +18,12 @@ export default function HomePage() {
               and high-quality video lessons tailored for engineering students.
             </p>
             <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/ask">
+              <Link to="/ask">
                 <Button size="lg" className="bg-white text-blue-800 hover:bg-blue-50 font-semibold text-lg px-8">
                   Ask a Question
                 </Button>
               </Link>
-              <Link href="/lessons">
+              <Link to="/lessons">
                 <Button size="lg" variant="outline" className="bg-transparent border-white text-white hover:bg-white/10 font-semibold text-lg px-8">
                   Browse Lessons
                 </Button>
@@ -142,12 +142,12 @@ export default function HomePage() {
               Join thousands of students who are already advancing their engineering careers with Tutorium
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/signup">
+              <Link to="/signup">
                 <Button size="lg" className="bg-white text-blue-900 hover:bg-blue-50 font-semibold px-8">
                   Create Account
                 </Button>
               </Link>
-              <Link href="/login">
+              <Link to="/login">
                 <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 font-semibold px-8">
                   Sign In
                 </Button>
@@ -224,7 +224,7 @@ export default function HomePage() {
               </div>
             </div>
             <div className="text-center">
-              <Link href="/questions">
+              <Link to="/questions">
                 <Button variant="outline" size="lg" className="gap-2">
                   View All Questions
                   <span className="text-lg">→</span>
@@ -347,7 +347,7 @@ export default function HomePage() {
               </div>
             </div>
             <div className="text-center mt-12">
-              <Link href="/lessons">
+              <Link to="/lessons">
                 <Button variant="outline" size="lg" className="gap-2">
                   Browse All Lessons
                   <span className="text-lg">→</span>

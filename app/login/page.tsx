@@ -6,10 +6,10 @@ import { signInWithEmailAndPassword, signInWithPopup, onAuthStateChanged } from 
 import { auth, googleProvider } from "@/lib/firebase"
 import { toast } from "sonner"
 import { Link } from "react-router-dom"
-import { Card, CardHeader, CardContent, CardFooter } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+import { Card, CardHeader, CardContent, CardFooter } from "../../components/ui/card"
+import { Button } from "../../components/ui/button"
+import { Input } from "../../components/ui/input"
+import { Label } from "../../components/ui/label"
 import { IconBrandGoogle, IconMail } from "@tabler/icons-react"
 
 export default function LoginPage() {
@@ -105,7 +105,7 @@ export default function LoginPage() {
                 required
                 placeholder="Enter your email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
                 className="mt-1"
               />
             </div>
@@ -122,7 +122,7 @@ export default function LoginPage() {
                 required
                 placeholder="Enter your password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
                 className="mt-1"
               />
             </div>

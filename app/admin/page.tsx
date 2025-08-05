@@ -6,8 +6,8 @@ import { db, auth } from "@/lib/firebase"
 import useUser from "../../src/hooks/useUser"
 import { useNavigate } from "react-router-dom"
 import { toast } from "sonner"
-import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "../../components/ui/card"
+import { Button } from "../../components/ui/button"
 import { IconCheck, IconX, IconLoader2 } from "@tabler/icons-react"
 
 const ADMIN_EMAILS = ["lateefedidi4@gmail.com", "envostructs@gmail.com"]

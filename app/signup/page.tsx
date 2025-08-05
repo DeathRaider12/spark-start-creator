@@ -1,28 +1,29 @@
 "use client"
 
 import { useState } from "react"
-import { useRouter } from "next/navigation"
+import { useNavigate } from "react-router-dom"
 import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth"
 import { setDoc, doc } from "firebase/firestore"
 import { auth, db } from "@/lib/firebase"
 import { toast } from "sonner"
-import Link from "next/link"
-import { Card, CardHeader, CardContent, CardFooter } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+import { Link } from "react-router-dom"
+import { Card, CardHeader, CardContent, CardFooter } from "../../components/ui/card"
+import { Button } from "../../components/ui/button"
+import { Input } from "../../components/ui/input"
+import { Label } from "../../components/ui/label"
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
+} from "../../components/ui/select"
 import { IconUserPlus } from "@tabler/icons-react"
 
 export default function SignupPage() {
-  const router = useRouter()
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
+    fullName: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -33,7 +34,7 @@ export default function SignupPage() {
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    if (!formData.email || !formData.password || !formData.confirmPassword) {
+    if (!formData.fullName || !formData.email || !formData.password || !formData.confirmPassword) {
       toast.error("Please fill in all fields")
       return
     }
@@ -68,7 +69,7 @@ export default function SignupPage() {
 
       await sendEmailVerification(user)
       toast.success("Account created! Please check your email for verification.")
-      router.push("/login")
+      navigate("/login")
     } catch (error: any) {
       toast.error(error.message)
     } finally {
@@ -85,13 +86,25 @@ export default function SignupPage() {
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
             Already have an account?{" "}
-            <Link href="/login" className="font-medium text-blue-600 hover:text-blue-500">
+            <Link to="/login" className="font-medium text-blue-600 hover:text-blue-500">
               Sign in
             </Link>
           </p>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSignup} className="space-y-6">
+            <div>
+              <Label htmlFor="fullName">Full Name</Label>
+              <Input
+                id="fullName"
+                type="text"
+                required
+                placeholder="Your full name"
+                value={formData.fullName}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, fullName: e.target.value })}
+                className="mt-1"
+              />
+            </div>
             <div>
               <Label htmlFor="email">Email address</Label>
               <Input
@@ -100,7 +113,7 @@ export default function SignupPage() {
                 required
                 placeholder="you@example.com"
                 value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, email: e.target.value })}
                 className="mt-1"
               />
             </div>
@@ -112,7 +125,7 @@ export default function SignupPage() {
                 required
                 placeholder="Create a strong password"
                 value={formData.password}
-                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, password: e.target.value })}
                 className="mt-1"
               />
             </div>
@@ -124,7 +137,7 @@ export default function SignupPage() {
                 required
                 placeholder="Confirm your password"
                 value={formData.confirmPassword}
-                onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, confirmPassword: e.target.value })}
                 className="mt-1"
               />
             </div>
@@ -132,7 +145,7 @@ export default function SignupPage() {
               <Label>I want to join as</Label>
               <Select
                 value={formData.role}
-                onValueChange={(value) => setFormData({ ...formData, role: value })}
+                onValueChange={(value: string) => setFormData({ ...formData, role: value })}
               >
                 <SelectTrigger className="mt-1">
                   <SelectValue placeholder="Select your role" />
@@ -152,11 +165,11 @@ export default function SignupPage() {
         <CardFooter className="flex justify-center">
           <p className="text-xs text-gray-500 text-center">
             By signing up, you agree to our{" "}
-            <Link href="/terms" className="text-blue-600 hover:text-blue-500">
+            <Link to="/terms" className="text-blue-600 hover:text-blue-500">
               Terms of Service
             </Link>{" "}
             and{" "}
-            <Link href="/privacy" className="text-blue-600 hover:text-blue-500">
+            <Link to="/privacy" className="text-blue-600 hover:text-blue-500">
               Privacy Policy
             </Link>
           </p>
