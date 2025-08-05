@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { auth } from '@/lib/firebase'
-import { updateCourseProgress } from '@/lib/firebase-collections'
+import { updateCourseProgress, createAchievement } from '@/lib/firebase-collections'
 import type { CourseProgress } from '@/lib/firebase-types'
 
 export async function POST(request: Request) {

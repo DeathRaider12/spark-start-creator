@@ -40,9 +40,8 @@ export default function Dashboard() {
                     description="Your learning dashboard"
                     keywords={['learning', 'education', 'engineering']}
                 />
-                <NavBar>
-                    <SearchBar />
-                </NavBar>
+                <NavBar />
+                <SearchBar />
                 <LoadingState />
                 <LecturerAnalytics />
                 <ContentManager />
