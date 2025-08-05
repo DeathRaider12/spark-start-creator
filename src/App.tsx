@@ -2,7 +2,7 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { Toaster } from 'sonner'
-import NavBar from '@/components/NavBar'
+import NavBar from './components/NavBar'
 import HomePage from '@/app/page'
 import LoginPage from '@/app/login/page'
 import SignupPage from '@/app/signup/page'
