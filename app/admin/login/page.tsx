@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { useNavigate, useLocation } from "react-router-dom"
+import { signInWithEmailAndPassword } from "firebase/auth"
+import { auth } from "@/lib/firebase"
 import { toast } from "sonner"
 import { Card, CardHeader, CardContent } from "../../../components/ui/card"
 import { Button } from "../../../components/ui/button"
@@ -37,24 +39,18 @@ export default function AdminLoginPage() {
             return
         }
 
-        if (password !== ADMIN_PASSWORD) {
-            toast.error("Invalid admin credentials")
-            return
-        }
-
         setLoading(true)
         try {
-            // Store admin session in localStorage
-            localStorage.setItem('adminAuth', JSON.stringify({
-                email: email,
-                isAdmin: true,
-                timestamp: Date.now()
-            }))
-            
+            // Sign in with Firebase using email/password
+            await signInWithEmailAndPassword(auth, email, password)
             toast.success("Welcome, Admin!")
             navigate("/admin")
         } catch (err: any) {
-            toast.error("Authentication failed. Please try again.")
+            if (err.code === 'auth/wrong-password' || err.code === 'auth/user-not-found') {
+                toast.error("Invalid credentials")
+            } else {
+                toast.error("Authentication failed. Please try again.")
+            }
         } finally {
             setLoading(false)
         }

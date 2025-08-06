@@ -17,16 +17,7 @@ export default function AdminPage() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    // Check for admin authentication (either Firebase or localStorage)
-    const adminAuth = localStorage.getItem('adminAuth')
-    if (adminAuth) {
-      const adminData = JSON.parse(adminAuth)
-      if (adminData.isAdmin && ADMIN_EMAILS.includes(adminData.email)) {
-        return // Admin is authenticated via localStorage
-      }
-    }
-
-    // Fallback to Firebase auth check
+    // Verify admin access with Firebase auth
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (!user || !ADMIN_EMAILS.includes(user.email || "")) {
         navigate("/login", { replace: true })
