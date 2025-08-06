@@ -1,8 +1,7 @@
+import React, { useEffect, useState } from "react"
 import { auth } from "@/lib/firebase"
 import { signOut } from "firebase/auth"
-import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
-import { Link } from "react-router-dom"
+import { useNavigate, Link } from "react-router-dom"
 
 export default function NavBar() {
   const [user, setUser] = useState<any>(null)
