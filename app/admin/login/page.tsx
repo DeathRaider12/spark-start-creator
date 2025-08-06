@@ -1,7 +1,5 @@
-import { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import { useNavigate, useLocation } from "react-router-dom"
-import { signInWithEmailAndPassword } from "firebase/auth"
-import { auth } from "@/lib/firebase"
 import { toast } from "sonner"
 import { Card, CardHeader, CardContent } from "../../../components/ui/card"
 import { Button } from "../../../components/ui/button"
@@ -34,6 +32,11 @@ export default function AdminLoginPage() {
             return
         }
 
+        if (!ADMIN_EMAILS.includes(email)) {
+            toast.error("Invalid admin email")
+            return
+        }
+
         if (password !== ADMIN_PASSWORD) {
             toast.error("Invalid admin credentials")
             return
@@ -41,7 +44,13 @@ export default function AdminLoginPage() {
 
         setLoading(true)
         try {
-            await signInWithEmailAndPassword(auth, email, password)
+            // Store admin session in localStorage
+            localStorage.setItem('adminAuth', JSON.stringify({
+                email: email,
+                isAdmin: true,
+                timestamp: Date.now()
+            }))
+            
             toast.success("Welcome, Admin!")
             navigate("/admin")
         } catch (err: any) {
